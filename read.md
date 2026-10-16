@@ -1,0 +1,1 @@
+python -c "from src.detection.eip import check_eip; print(check_eip())".
