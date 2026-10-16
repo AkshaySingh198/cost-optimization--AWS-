@@ -90,3 +90,33 @@ aws ssm put-parameter \
 ```bash
 python -c "import sys; sys.path.insert(0, 'src'); from lamda import lambda_handler; print(lambda_handler({}, None))"
 ```
+
+### 3. Deploy with Terraform
+```bash
+cd terraform
+terraform init
+terraform plan
+terraform apply
+```
+
+---
+
+## 🔮 Future Improvements & Roadmap
+
+The following enhancements are planned for future iterations of this project:
+
+- [ ] **CI/CD Automation (GitHub Actions)**:
+  - Automated Python linting with `flake8` or `ruff`.
+  - Zero-cost unit testing using `pytest` and `moto` to mock AWS services in memory.
+  - Automated Terraform validation (`terraform fmt -check`, `terraform validate`, and `tfsec` security scans) on every pull request.
+- [ ] **Interactive Slack Approval Workflow (Human-in-the-Loop)**:
+  - Add interactive Slack Block Kit buttons (`Approve Deletion`, `Snooze 7 Days`, `Ignore`) linked to Amazon API Gateway and Lambda for one-click remediation directly from Slack.
+- [ ] **Multi-Region Scanning**:
+  - Dynamically query `ec2.describe_regions()` to discover and audit orphaned resources across all active AWS regions globally.
+- [ ] **Real Billing Integration with AWS Cost Explorer**:
+  - Integrate with the AWS Cost Explorer API (`ce:GetCostAndUsage`) to pull real actual spend metrics rather than estimated pricing tables.
+- [ ] **Scheduled Start/Stop for Dev/Staging Environments**:
+  - Automatically stop non-production EC2 instances outside of business hours (e.g., nights and weekends) to reduce compute costs by up to 65%.
+- [ ] **Historical Trend Analytics**:
+  - Export weekly JSON scan results to an Amazon S3 bucket and query with Amazon Athena to generate long-term cost optimization dashboards.
+
