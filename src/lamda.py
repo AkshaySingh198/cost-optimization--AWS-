@@ -3,6 +3,7 @@ from detection.EBS import check_old_snapshots, check_unattached_volumes
 from detection.EIP import check_eip
 from detection.EC2_IDLE import check_idle_ec2
 from detection.TAG import check_tags
+from notifier.slack import send_slack_report
 
 def lambda_handler(event,context):
     dry_run = True
@@ -36,6 +37,7 @@ def lambda_handler(event,context):
             "untagged": untagged
         }
     }
+    send_slack_report(summary)
 
     return {
         "statusCode": 200,
